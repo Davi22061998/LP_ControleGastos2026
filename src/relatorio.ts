@@ -17,5 +17,19 @@ export function resumoPorCategoria(despesas: Despesa[]): Record<Categoria, numbe
 // resumo mes
 
 export function resumoPorMes(despesas: Despesa[]): Record<number, number> {
-  throw new Error("não implementado");
+  const resumo: Record<number, number> = {};
+
+  // Inicializa todos os 12 meses com valor zero
+  for (let m = 1; m <= 12; m++) {
+    resumo[m] = 0;
+  }
+
+  // acumula os valores de cada despesa no mês correspondente
+  for (const d of despesas) {
+    if (resumo[d.mes] !== undefined) {
+      resumo[d.mes]! += d.valor;
+    }
+  }
+
+  return resumo;
 }
