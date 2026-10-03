@@ -1,5 +1,8 @@
 
 import type { Despesa } from './tipos.js';
+
+// adicionar despesa
+
 export function adicionarDespesa(despesas: Despesa[], nova: Despesa): Despesa[] {
   if (nova.valor <= 0) {
     throw new Error('Valor invalido');
@@ -8,4 +11,10 @@ export function adicionarDespesa(despesas: Despesa[], nova: Despesa): Despesa[] 
     throw new Error('Mes invalido');
   }
   return [...despesas, nova];
+}
+
+// remover despesa
+
+export function removerDespesa(despesas: Despesa[], id: number): Despesa[] {
+  throw new Error("não implementado");
 }
