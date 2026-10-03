@@ -34,5 +34,7 @@ export function totalGeral(despesas: Despesa[]): number {
 // total por categhoria
 
 export function totalPorCategoria(despesas: Despesa[], categoria: Categoria): number {
-  throw new Error("não implementado");
+  return despesas
+    .filter((d) => d.categoria === categoria)
+    .reduce((acc, d) => acc + d.valor, 0);
 }
