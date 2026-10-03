@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { adicionarDespesa, removerDespesa } from './despesas.js';
-import type { Despesa } from './tipos.js';
+import { adicionarDespesa, removerDespesa, despesasDaCategoria } from './despesas.js';
+import type { Despesa, Categoria } from './tipos.js';
 
 // testes para adicionar despesas
 
@@ -30,6 +30,7 @@ describe('adicionarDespesa', () => {
 });
 
 // testes para remover despesas
+
 describe('removerDespesa', () => {
   const lista: Despesa[] = [
     { id: 1, descricao: 'Mercado', valor: 100, categoria: 'alimentacao', mes: 3 },
@@ -46,5 +47,26 @@ describe('removerDespesa', () => {
     const resultado = removerDespesa(lista, 999);
     expect(resultado.length).toBe(2);
     expect(resultado).not.toBe(lista);
+  });
+});
+
+// categoria de despesas
+
+describe('despesasDaCategoria', () => {
+  const lista: Despesa[] = [
+    { id: 1, descricao: 'Mercado', valor: 100, categoria: 'alimentacao', mes: 3 },
+    { id: 2, descricao: 'Feira', valor: 50, categoria: 'alimentacao', mes: 4 },
+    { id: 3, descricao: 'Busão', valor: 20, categoria: 'transporte', mes: 3 }
+  ];
+
+  it('deve retornar apenas as despesas da categoria solicitada', () => {
+    const resultado = despesasDaCategoria(lista, 'alimentacao');
+    expect(resultado.length).toBe(2);
+    expect(resultado.every((d) => d.categoria === 'alimentacao')).toBe(true);
+  });
+
+  it('deve retornar array vazio se nao houver despesas na categoria', () => {
+    const resultado = despesasDaCategoria(lista, 'lazer');
+    expect(resultado).toEqual([]);
   });
 });
