@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { adicionarDespesa, removerDespesa, despesasDaCategoria } from './despesas.js';
+import { adicionarDespesa, removerDespesa, despesasDaCategoria, totalGeral } from './despesas.js';
 import type { Despesa, Categoria } from './tipos.js';
 
 // testes para adicionar despesas
@@ -68,5 +68,25 @@ describe('despesasDaCategoria', () => {
   it('deve retornar array vazio se nao houver despesas na categoria', () => {
     const resultado = despesasDaCategoria(lista, 'lazer');
     expect(resultado).toEqual([]);
+  });
+});
+
+// total geral de despesas
+
+describe('totalGeral', () => {
+  const lista: Despesa[] = [
+    { id: 1, descricao: 'Mercado', valor: 100, categoria: 'alimentacao', mes: 3 },
+    { id: 2, descricao: 'Aluguel', valor: 1200, categoria: 'moradia', mes: 3 },
+    { id: 3, descricao: 'Busão', valor: 50, categoria: 'transporte', mes: 4 }
+  ];
+
+  it('deve calcular a soma total dos valores de todas as despesas', () => {
+    const resultado = totalGeral(lista);
+    expect(resultado).toBe(1350);
+  });
+
+  it('deve retornar 0 quando o array de despesas estiver vazio', () => {
+    const resultado = totalGeral([]);
+    expect(resultado).toBe(0);
   });
 });
