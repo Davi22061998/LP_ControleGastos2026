@@ -33,3 +33,9 @@ export function resumoPorMes(despesas: Despesa[]): Record<number, number> {
 
   return resumo;
 }
+
+//matriz categorias por mes
+
+export function matrizCategoriaPorMes(despesas: Despesa[]): number[][] {
+  throw new Error("não implementado");
+}
