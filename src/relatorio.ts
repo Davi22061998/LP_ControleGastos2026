@@ -37,5 +37,17 @@ export function resumoPorMes(despesas: Despesa[]): Record<number, number> {
 //matriz categorias por mes
 
 export function matrizCategoriaPorMes(despesas: Despesa[]): number[][] {
-  throw new Error("não implementado");
+  // Cria matriz 4x12 inicializada com zeros
+  const matriz: number[][] = CATEGORIAS.map(() => Array(12).fill(0));
+
+  for (const d of despesas) {
+    const catIndex = CATEGORIAS.indexOf(d.categoria);
+    const mesIndex = d.mes - 1; // Ajusta mês (1..12) para índice base zero (0..11)
+
+    if (catIndex !== -1 && mesIndex >= 0 && mesIndex < 12) {
+      matriz[catIndex]![mesIndex]! += d.valor;
+    }
+  }
+
+  return matriz;
 }
