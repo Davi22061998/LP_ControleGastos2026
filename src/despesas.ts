@@ -21,12 +21,13 @@ export function despesasDaCategoria(despesas: Despesa[], categoria: Categoria): 
   return despesas.filter((d) => d.categoria === categoria);
 }
 
-// total gasto (especificação)
 export function totalGasto(despesas: Despesa[]): number {
-  throw new Error("não implementado");
+  return despesas.reduce((acc, d) => acc + d.valor, 0);
 }
 
-// maior despesa (especificação)
 export function maiorDespesa(despesas: Despesa[]): Despesa | undefined {
-  throw new Error("não implementado");
+  if (despesas.length === 0) {
+    return undefined;
+  }
+  return despesas.reduce((maior, d) => (d.valor > maior.valor ? d : maior), despesas[0]!);
 }
