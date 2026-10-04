@@ -1,8 +1,6 @@
-
 import type { Despesa, Categoria } from './tipos.js';
 
 // adicionar despesa
-
 export function adicionarDespesa(despesas: Despesa[], nova: Despesa): Despesa[] {
   if (nova.valor <= 0) {
     throw new Error('Valor invalido');
@@ -14,27 +12,21 @@ export function adicionarDespesa(despesas: Despesa[], nova: Despesa): Despesa[] 
 }
 
 // remover despesa
-
 export function removerDespesa(despesas: Despesa[], id: number): Despesa[] {
   return despesas.filter((d) => d.id !== id);
 }
 
-//categoria despesas
-
+// despesas da categoria
 export function despesasDaCategoria(despesas: Despesa[], categoria: Categoria): Despesa[] {
   return despesas.filter((d) => d.categoria === categoria);
 }
 
-// total geral de despesas
-
-export function totalGeral(despesas: Despesa[]): number {
-  return despesas.reduce((acc, d) => acc + d.valor, 0);
+// total gasto (especificação)
+export function totalGasto(despesas: Despesa[]): number {
+  throw new Error("não implementado");
 }
 
-// total por categhoria
-
-export function totalPorCategoria(despesas: Despesa[], categoria: Categoria): number {
-  return despesas
-    .filter((d) => d.categoria === categoria)
-    .reduce((acc, d) => acc + d.valor, 0);
+// maior despesa (especificação)
+export function maiorDespesa(despesas: Despesa[]): Despesa | undefined {
+  throw new Error("não implementado");
 }
