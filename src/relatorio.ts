@@ -1,53 +1,29 @@
 import type { Despesa, Categoria } from './tipos.js';
 import { CATEGORIAS } from './tipos.js';
-import { totalPorCategoria } from './despesas.js';
+import { totalGasto, maiorDespesa } from './despesas.js';
 
-// resumo por categoria
-
-export function resumoPorCategoria(despesas: Despesa[]): Record<Categoria, number> {
-  const resumo = {} as Record<Categoria, number>;
-
-  for (const cat of CATEGORIAS) {
-    resumo[cat] = totalPorCategoria(despesas, cat);
+// 1. Nome de exibição usando switch 
+export function descricaoCategoria(categoria: Categoria): string {
+  switch (categoria) {
+    case 'alimentacao':
+      return 'Alimentação';
+    case 'transporte':
+      return 'Transporte';
+    case 'lazer':
+      return 'Lazer';
+    case 'moradia':
+      return 'Moradia';
+    default:
+      return categoria;
   }
-
-  return resumo;
 }
 
-// resumo mes
-
-export function resumoPorMes(despesas: Despesa[]): Record<number, number> {
-  const resumo: Record<number, number> = {};
-
-  // Inicializa todos os 12 meses com valor zero
-  for (let m = 1; m <= 12; m++) {
-    resumo[m] = 0;
-  }
-
-  // acumula os valores de cada despesa no mês correspondente
-  for (const d of despesas) {
-    if (resumo[d.mes] !== undefined) {
-      resumo[d.mes]! += d.valor;
-    }
-  }
-
-  return resumo;
+// 2. Matriz 4x12 usando estritamente laços for/while 
+export function matrizCategoriaMes(despesas: Despesa[]): number[][] {
+  throw new Error("não implementado");
 }
 
-//matriz categorias por mes
-
-export function matrizCategoriaPorMes(despesas: Despesa[]): number[][] {
-  // Cria matriz 4x12 inicializada com zeros
-  const matriz: number[][] = CATEGORIAS.map(() => Array(12).fill(0));
-
-  for (const d of despesas) {
-    const catIndex = CATEGORIAS.indexOf(d.categoria);
-    const mesIndex = d.mes - 1; // Ajusta mês (1..12) para índice base zero (0..11)
-
-    if (catIndex !== -1 && mesIndex >= 0 && mesIndex < 12) {
-      matriz[catIndex]![mesIndex]! += d.valor;
-    }
-  }
-
-  return matriz;
+// 3. Formatação em texto com métodos de string 
+export function formatarRelatorio(despesas: Despesa[]): string {
+  throw new Error("não implementado");
 }
